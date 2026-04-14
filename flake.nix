@@ -1,37 +1,26 @@
 {
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
-    flake-utils.url = "github:numtide/flake-utils";
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+  description = "fortran-stakeholder scaffold";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+  outputs = { self, nixpkgs }:
+    let
+      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      forAllSystems = f: builtins.listToAttrs (map (system: { name = system; value = f system; }) systems);
+    in {
+      packages = forAllSystems (system:
+        let pkgs = import nixpkgs { inherit system; };
+        in {
+          check = pkgs.writeShellApplication {
+            name = "check";
+            runtimeInputs = [ pkgs.python3 ];
+            text = ''
+              python3 scripts/validate_scaffold.py
+            '';
+          };
+          default = self.packages.${system}.check;
+        });
+      apps = forAllSystems (system: {
+        check = { type = "app"; program = "${self.packages.${system}.check}/bin/check"; };
+        default = self.apps.${system}.check;
+      });
     };
-  };
-
-  outputs = {
-    self,
-    nixpkgs,
-    fenix,
-    flake-utils,
-  }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-        fenix_pkgs = fenix.packages.${system};
-      in {
-        nixpkgs.overlays = [fenix.overlays.default];
-        devShells.default = pkgs.mkShell {
-          nativeBuildInputs = [pkgs.pkg-config pkgs.opencv];
-          packages = [
-            (
-              fenix_pkgs.fromToolchainFile {
-                file = ./rust-toolchain.toml;
-                sha256 = "sha256-AJ6LX/Q/Er9kS15bn9iflkUwcgYqRQxiOIL2ToVAXaU=";
-              }
-            )
-            pkgs.rust-analyzer
-          ];
-        };
-      }
-    );
 }

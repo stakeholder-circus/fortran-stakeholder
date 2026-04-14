@@ -1,25 +1,18 @@
 # AI Disclosure
 
-This repository is part of the stakeholder-circus rewrite program.
-
-- Repository: rust-stakeholder
-- Role: Canonical Rust source of truth and the only true public fork of giacomo-b/rust-stakeholder.
-- Review model: Codex-assisted, manually reviewed, human in the loop
-- Contact: david@supan.si
-
-## Provenance policy
-
-Use these categories consistently:
-
-- human
-- ai-assisted
-- ai-drafted
-- code-generated
+- Repository: `fortran-stakeholder`
+- Role: local-only scaffold in the next-20 autonomous sprint
+- Review model: AI-assisted drafting with manual review required before publication
+- Provenance model: imported Rust history retained; scaffold content is derivative and traceable
+- Attribution intent: preserve upstream MIT notice exactly and record later manual changes explicitly
+- Contact: `@davidsupan`
 
 ## Commit trailers
+- `Reviewed-by: David Supan`
+- `Assisted-by: Codex`
+- `Generated-by: Codex` when a commit is primarily model-drafted
 
-Use the following trailers on relevant commits:
-
-- Assisted-by: OpenAI Codex
-- Generated-by: OpenAI Codex
-- Reviewed-by: David Supan
+## Guardrails
+- No silent divergence from `stakeholder-core`
+- Missing features must fail fast and be recorded in `GAPS.md`
+- Deterministic normalized JSON remains the first implementation target

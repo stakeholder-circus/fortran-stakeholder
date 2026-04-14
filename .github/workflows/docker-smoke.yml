@@ -1,0 +1,13 @@
+name: docker-smoke
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  docker-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t fortran-stakeholder .
+      - run: docker run --rm fortran-stakeholder

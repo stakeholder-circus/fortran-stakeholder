@@ -1,23 +1,15 @@
-# Parity
+# Fortran Parity
 
-## Role
+- Role: local-only full-parity target in the next-20 wave
+- Parity class: full-parity
 
-Canonical Rust source of truth and the only true public fork of giacomo-b/rust-stakeholder.
+## Review model
+- Rust remains the canonical source-of-truth.
+- `stakeholder-core` remains the behavioral contract.
+- This repo is deterministic-first for the initial tranche.
 
-## Parity class
-
-- canonical-source
-
-## Method and Review Model
-
-- Codex-assisted
-- Manually reviewed
-- Human in the loop
-- Derived from giacomo-b/rust-stakeholder where applicable
-- Missing behavior must fail fast and be recorded explicitly in GAPS.md
-
-## Attribution model
-
-- Original upstream Rust history is preserved for language repos created from the Rust baseline.
-- New language-specific rewrite commits sit on top of the imported upstream history.
-- MIT licensing remains in place for fork-derived work.
+## Promotion prerequisites
+- Deterministic `classic-six + modern-core` implemented.
+- Native and Docker validation green.
+- `--list-values`, deterministic same-seed JSON, and experimental-provider fail-fast present.
+- Publication/governance wave complete and remote access available.
