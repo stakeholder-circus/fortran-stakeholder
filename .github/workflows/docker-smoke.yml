@@ -1,13 +1,15 @@
 name: docker-smoke
-
 on:
-  push:
   pull_request:
-
+  push:
+    branches: [main]
 jobs:
   docker-smoke:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: docker build -t fortran-stakeholder .
-      - run: docker run --rm fortran-stakeholder
+      - run: docker run --rm fortran-stakeholder --list-values
+      - run: docker run --rm fortran-stakeholder --output-format json --focus-family code_analyzer --seed 123
+      - run: docker run --rm fortran-stakeholder --output-format json --focus-family platform_engineering --seed 987
+      - run: '! docker run --rm fortran-stakeholder --experimental-provider local-demo'

@@ -1,9 +1,8 @@
-# Rust Docker
+# Docker
 
-## Build and test
-- `docker build -t rust-stakeholder .`
-- `docker run --rm rust-stakeholder --list-values`
+```sh
+docker build -t fortran-stakeholder .
+docker run --rm fortran-stakeholder --list-values
+```
 
-## Rationale
-- The image compiles and tests the Rust baseline before packaging the runtime binary.
-- Docker is the reproducible Linux gate; host and CI matrices still cover native OS behavior.
+Docker builds and tests the Fortran CLI before producing the runtime image.
