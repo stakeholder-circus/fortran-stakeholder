@@ -1,4 +1,4 @@
-FROM gcc:15 AS build
+FROM gcc:16 AS build
 WORKDIR /app
 COPY app ./app
 COPY tests ./tests
@@ -6,7 +6,7 @@ RUN mkdir -p build \
     && gfortran -std=f2018 -ffree-line-length-none -fall-intrinsics -Wall -Wextra -pedantic app/stakeholder.f90 -o build/stakeholder \
     && tests/test_cli.sh ./build/stakeholder
 
-FROM gcc:15
+FROM gcc:16
 WORKDIR /app
 LABEL org.opencontainers.image.title="fortran-stakeholder"
 LABEL org.opencontainers.image.description="Deterministic-first Fortran stakeholder CLI"
