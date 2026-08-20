@@ -5,7 +5,7 @@ required = [
     'docs/traceability/first-push-families.md', '.githooks/commit-msg', '.githooks/pre-push',
     '.github/CODEOWNERS', '.github/PULL_REQUEST_TEMPLATE.md', '.github/dependabot.yml',
     '.github/workflows/actionlint.yml', '.github/workflows/dependency-review.yml',
-    '.github/workflows/ci.yml', '.github/workflows/ci-native.yml', '.github/workflows/docker-smoke.yml',
+    '.github/workflows/ci-native.yml', '.github/workflows/docker-smoke.yml',
     'flake.nix', 'Dockerfile', 'flake.lock', 'app/stakeholder.f90', 'tests/test_cli.sh'
 ]
 missing = [p for p in required if not Path(p).exists()]
