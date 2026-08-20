@@ -7,7 +7,7 @@ jobs:
   docker-smoke:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - run: docker build -t fortran-stakeholder .
       - run: docker run --rm fortran-stakeholder --list-values
       - run: docker run --rm fortran-stakeholder --output-format json --focus-family code_analyzer --seed 123
