@@ -3,11 +3,16 @@ on:
   pull_request:
   push:
     branches: [main]
+permissions:
+  contents: read
 jobs:
   ci-native:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - run: sudo apt-get update && sudo apt-get install -y gfortran
       - run: python3 scripts/validate_scaffold.py
       - run: mkdir -p build && gfortran -std=f2018 -ffree-line-length-none -fall-intrinsics -Wall -Wextra -pedantic app/stakeholder.f90 -o build/stakeholder

@@ -1,9 +1,5 @@
 version: 2
 updates:
-  - package-ecosystem: cargo
-    directory: /
-    schedule:
-      interval: weekly
   - package-ecosystem: docker
     directory: /
     schedule:
@@ -12,3 +8,7 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - '*'
